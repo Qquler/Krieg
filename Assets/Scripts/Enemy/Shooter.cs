@@ -11,19 +11,18 @@ public class Shooter : MonoBehaviour
     public float timeShoot = 2f;
     void Start()
     {
-        //shoot.transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
-        StartCoroutine(Shooting());
+        InvokeRepeating("Fire", 2f, 2f); 
     }
-    private void Update()
-    {
-       if (g==1)
-        {
-            Fire();
-            g = 0;
-            StartCoroutine(Shooting());
-        }
-       
-    }
+    //private void Update()
+    //{
+    //    if (g == 1)
+    //    {
+    //        Fire();
+    //        g = 0;
+    //        StartCoroutine(Shooting());
+    //    }
+
+    //}
     // Update is called once per frame
     IEnumerator Shooting()
     {

@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,9 @@ public class Player : MonoBehaviour
 
     Rigidbody2D rb;
     Animator animator;
+    public float metrics;
     public float speed;
+    public float runspeed;
     public bool isPlayer;
     public float jumpHeight;
     public bool canBeat = true;
@@ -72,17 +75,23 @@ public class Player : MonoBehaviour
             }
             else
             {
+                float movment = speed;
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
+                    movment = runspeed;
+                }
+                    float fs = Mathf.Sqrt(Input.GetAxis("Horizontal") * Input.GetAxis("Horizontal") + Input.GetAxis("Vertical") * Input.GetAxis("Vertical"));
+                    if(fs == 0)
+                    {
+                        fs = 1;
+                    }
+                    rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (movment) / fs, rb.velocity.y);
+                    rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (movment) / fs);
 
-                    rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (speed + 2), rb.velocity.y);
-                    rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed + 2));
-                }
-                else
-                {
-                    rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
-                    rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * speed);
-                }
+                    metrics = fs;
+                    //rb.velocity = new Vector2(rb.velocity.x, );
+                
+                
             }
         }
         else

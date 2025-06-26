@@ -9,9 +9,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] GameObject lvlController;
     public Transform bulletPoint;
     public float sped;
+    public float liveTime;
+    public int damage;
     void Start()
     {
-        Destroy(gameObject, 4);
+        Destroy(gameObject, liveTime);
     }
 
     void FixedUpdate()
@@ -27,7 +29,7 @@ public class Bullet : MonoBehaviour
          if (!collision.isTrigger && collision.gameObject.tag == "Player" )
             {
             Player player = collision.gameObject.GetComponent<Player>();
-            player.ChangeHP(15);
+            player.ChangeHP(damage);
             // timer = 90;
 
             if (player.curHP <= 0)

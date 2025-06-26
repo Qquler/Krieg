@@ -43,10 +43,10 @@ GameObject:
   - component: {fileID: 8142102729705458145}
   - component: {fileID: 2502320303782757300}
   - component: {fileID: 6755786042623391582}
+  - component: {fileID: 3970171837970864866}
   - component: {fileID: 1949584361779354966}
-  - component: {fileID: -8928343862123455589}
   m_Layer: 0
-  m_Name: E_Projectile
+  m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.14285529, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.019583866, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -177,7 +177,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 1
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
@@ -192,6 +192,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3970171837970864866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2219686671862379446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c952b87241a6882439cc7c3ab0b1bbc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coin: {fileID: 4971141080790653099, guid: 0a5e34248144fa544a4a1a4934108842, type: 3}
+  lvlController: {fileID: 1536421365128459584, guid: 6ebc70c1253408c47b8da1c9d90d42ed, type: 3}
+  bulletPoint: {fileID: 6669554087265985076}
+  sped: 10
+  coinPoint: {fileID: 6669554087265985076}
+  damage: 25
+  liveTime: 0.4
 --- !u!114 &1949584361779354966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,19 +224,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 1, z: 0}
-  speed: 10
---- !u!114 &-8928343862123455589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2219686671862379446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be58717b8dff87040a9d163927530024, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lvlController: {fileID: 1536421365128459584, guid: 6ebc70c1253408c47b8da1c9d90d42ed, type: 3}
-  bulletPoint: {fileID: 6669554087265985076}
-  sped: 5
+  speed: 30

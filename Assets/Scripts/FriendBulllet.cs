@@ -6,12 +6,12 @@ public class FriendBullet : MonoBehaviour
 {
     public Rigidbody2D coin;
     Rigidbody2D rb;
-    // [SerializeField] GameObject lvlController;
     [SerializeField] GameObject lvlController;
     LevelController levelController;
     public Transform bulletPoint;
     public float sped;
     public Transform coinPoint;
+    public int damage;
     public float liveTime;
 
     void Start()
@@ -33,7 +33,7 @@ public class FriendBullet : MonoBehaviour
         if (!collision.isTrigger && collision.gameObject.tag != "Player") 
         {
             EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
-            enemy.ChangeHP(25);
+            enemy.ChangeHP(damage);
             // timer = 90;
 
             if (enemy.curHP <= 0)
