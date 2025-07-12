@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public float waitTimeCharge = 0.2f;
     public float waitTimeCharge1 = 1f;
     //bool canBeat = true;
-
+    //чел, нейроликтер - руина
     Rigidbody2D rb;
     Animator animator;
     public float speed;
