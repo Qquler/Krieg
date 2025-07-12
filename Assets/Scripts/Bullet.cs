@@ -9,9 +9,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] GameObject lvlController;
     public Transform bulletPoint;
     public float sped;
+    public float g = 1;
+
     void Start()
     {
-        Destroy(gameObject, 4);
+        Destroy(gameObject, 2);
     }
 
     void FixedUpdate()
@@ -25,18 +27,28 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D (Collider2D collision)
     {
          if (!collision.isTrigger && collision.gameObject.tag == "Player" )
-            {
+         {
             Player player = collision.gameObject.GetComponent<Player>();
-            player.ChangeHP(15);
-            // timer = 90;
+            if (g == 1) 
+            {
+                player.ChangeHP(15);
+              //  player.curHP = 0;                                                ////Œ¡ﬂ«¿“≈À‹ÕŒ »—œŒÀ‹«Œ¬¿“‹ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                g = 0;
+                // timer = 90;
+            }
 
-            if (player.curHP <= 0)
+
+            if (player.CurHP() <=0)
             {
                 lvlController.GetComponent<LevelController>().Lose();
             }
             Destroy(this.gameObject);
+         }
+         else if(collision.gameObject.tag == "Wall")
+        {
+            Destroy(this.gameObject);
         }
-         Destroy(this.gameObject);
+         
     }
     
 }

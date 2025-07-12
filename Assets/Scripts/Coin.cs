@@ -21,9 +21,9 @@ using UnityEngine;
             {
             g = 0;
             PlayAudio(sound1);
-            levelController.coinText.text =
-                     (int.Parse(levelController.coinText.text) + 10).ToString();
-                PlayerPrefs.SetInt("Coin", PlayerPrefs.GetInt("Coin") + 10);
+            //levelController.coinText.text =
+            //         (int.Parse(levelController.coinText.text) + 10).ToString();
+            //    PlayerPrefs.SetInt("Coin", PlayerPrefs.GetInt("Coin") + 10);
                 Destroy(this.gameObject);
             }
         }

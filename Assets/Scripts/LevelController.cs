@@ -8,14 +8,14 @@ public class LevelController : MonoBehaviour
 {
     public GameObject panelPause;
     public Transform player;
-    public Transform arm1;
-    public Transform arm2;
-    public TMP_Text coinText;
+    //public Transform arm1;
+    //public Transform arm2;
+    //public TMP_Text coinText;
 
     private void Start()
     {
         PauseOn(false);
-        coinText.text = "0";
+        //coinText.text = "0";
     }
 
     private void Update()
@@ -38,16 +38,16 @@ public class LevelController : MonoBehaviour
             Time.timeScale = 0f;
             player.GetComponent<Player>().enabled = false;
             panelPause.SetActive(true);
-            arm1.GetComponent<Poit_to_mouse>().enabled = false;
-            arm2.GetComponent<Poit_to_mouse>().enabled = false;
+            //arm1.GetComponent<Poit_to_mouse>().enabled = false;
+            //arm2.GetComponent<Poit_to_mouse>().enabled = false;
         }
         else
         {
             Time.timeScale = 1f;
             player.GetComponent<Player>().enabled = true;
-            panelPause.SetActive(false);
-            arm1.GetComponent<Poit_to_mouse>().enabled = true;
-            arm2.GetComponent<Poit_to_mouse>().enabled = true;
+            //panelPause.SetActive(false);                                   //¬ключить, когда будет менюшка
+            //arm1.GetComponent<Poit_to_mouse>().enabled = true;
+            //arm2.GetComponent<Poit_to_mouse>().enabled = true;
         }
     }
 

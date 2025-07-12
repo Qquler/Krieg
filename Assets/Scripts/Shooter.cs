@@ -9,14 +9,17 @@ public class Shooter : MonoBehaviour
     public float g = 0;
     //public Transform shoot;
     public float timeShoot = 2f;
+    public float angle = 45;
     void Start()
     {
         //shoot.transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
         StartCoroutine(Shooting());
+        
     }
     private void Update()
     {
-       if (g==1)
+        //Debug.Log();
+        if (g==1)
         {
             Fire();
             g = 0;
@@ -35,7 +38,7 @@ public class Shooter : MonoBehaviour
     }
     void Fire()
     {
-        Rigidbody2D clone = Instantiate(bullet, gunPoint.position, gunPoint.rotation);
+        Rigidbody2D clone = Instantiate(bullet, gunPoint.position, gunPoint.rotation);   // третье, которое rotation       //Quaternion.Euler(gunPoint.rotation.x, gunPoint.rotation.y, gunPoint.rotation.z));
         //clone.velocity = transform.TransformDirection(gunPoint. * speed);
         //clone.transform.right = gunPoint.right;
 

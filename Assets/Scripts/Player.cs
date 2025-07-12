@@ -17,12 +17,14 @@ public class Player : MonoBehaviour
     public float jumpHeight;
     public bool canBeat = true;
     public bool canCharge = true;
+    public bool canCharge1 = true;
     public int fullHP = 100;
-    public int curHP;
+    [SerializeField] private int curHP;
+    
     //public TMP_Text HPText;
     //[SerializeField] AudioController AudioController;
 
-    public Transform groundCheck;
+    //public Transform groundCheck;
    // bool isGrounded;
 
     // Start is called before the first frame update
@@ -62,33 +64,54 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        float v = Input.GetAxis("Vertical");
+        float h = Input.GetAxis("Horizontal");
+
+        Debug.Log(h);
+
+        var direction = new Vector2(h, v);
+        //rb.MovePosition(rb.position + direction.normalized * speed * Time.deltaTime);
+
         if (canCharge == true) 
         { 
         
             if (Input.GetKey(KeyCode.Space))
             {
+                canCharge1 = false;
                 StartCoroutine(WaitingCharge());
-            
             }
             else
             {
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
-
-                    rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (speed + 2), rb.velocity.y);
-                    rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed + 2));
+                    rb.MovePosition(rb.position + direction.normalized * (speed + 2) * Time.deltaTime);
+                    //rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (speed + 2), rb.velocity.y);
+                    //rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed + 2));
                 }
                 else
                 {
-                    rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
-                    rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * speed);
+                    rb.MovePosition(rb.position + direction.normalized * (speed) * Time.deltaTime);
+                    //rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
+                    //rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * speed);
                 }
             }
         }
         else
         {
-            rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (speed), rb.velocity.y);
-            rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed));
+            if (Input.GetKey(KeyCode.LeftShift) && canCharge1 == true)
+            {
+                rb.MovePosition(rb.position + direction.normalized * (speed + 2) * Time.deltaTime);
+                //rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (speed + 2), rb.velocity.y);
+                //rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed + 2));
+            }
+            else if (canCharge1 == true)
+            {
+                rb.MovePosition(rb.position + direction.normalized * (speed) * Time.deltaTime);
+                //rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
+                //rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * speed);
+            }
+            //rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (speed), rb.velocity.y);            //–аскомментировать, если понадобитс€ стан после рывка
+            //rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed));
         }
     }
     //void CheckGround()
@@ -120,6 +143,11 @@ public class Player : MonoBehaviour
         }
         
     }
+    public float CurHP()
+    {
+        return curHP;
+
+    }
     public void ChangeImageHP()
     {
         
@@ -139,11 +167,16 @@ public class Player : MonoBehaviour
     }
     IEnumerator WaitingCharge()
     {
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (speed + 8), rb.velocity.y);
-        rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed + 8));
+        float v = Input.GetAxis("Vertical");
+        float h = Input.GetAxis("Horizontal");
+        var direction = new Vector2(h, v);
+        rb.MovePosition(rb.position + direction.normalized * (speed + 8) * Time.deltaTime);
+        //rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (speed + 8), rb.velocity.y);
+        //rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed + 8));
 
         yield return new WaitForSeconds(waitTimeCharge); //строка ожидани€
         canCharge = false;
+        canCharge1 = true;
         StartCoroutine(WaitingCharge1());
     }
     IEnumerator WaitingCharge1()

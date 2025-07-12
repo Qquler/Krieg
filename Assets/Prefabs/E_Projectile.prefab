@@ -110,7 +110,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.14285529, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.70980394, g: 0.90196085, b: 0.10980393, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -204,8 +204,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a53c41aea2df44195ade3dbe2a79dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lvlController: {fileID: 1536421365128459584, guid: 6ebc70c1253408c47b8da1c9d90d42ed, type: 3}
   direction: {x: 0, y: 1, z: 0}
-  speed: 10
+  speed: 15
 --- !u!114 &-8928343862123455589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,4 +221,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lvlController: {fileID: 1536421365128459584, guid: 6ebc70c1253408c47b8da1c9d90d42ed, type: 3}
   bulletPoint: {fileID: 6669554087265985076}
-  sped: 5
+  sped: 3
+  g: 1

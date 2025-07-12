@@ -13,6 +13,10 @@ public class FriendBullet : MonoBehaviour
     public float sped;
     public Transform coinPoint;
     public float liveTime;
+    public Vector3 direction = Vector3.right; // Направление увеличения
+    public float speed = 1f;
+    private float g = 0;
+    private float g1 = 1;
 
     void Start()
     {
@@ -25,13 +29,25 @@ public class FriendBullet : MonoBehaviour
     }
     private void Update()
     {
+        if (g == 1)
+        {
+            //Vector3 scaleChange = direction.normalized * speed * Time.deltaTime;
+            //transform.localScale -= scaleChange;
+            this.gameObject.transform.position = Vector3.Lerp(transform.position, bulletPoint.transform.position, 0 * Time.deltaTime);
+        }
+        else
+        {
+            this.gameObject.transform.position = Vector3.Lerp(transform.position, bulletPoint.transform.position, sped * Time.deltaTime);
+        }
+
         this.gameObject.transform.position = Vector3.Lerp(transform.position, bulletPoint.transform.position, sped * Time.deltaTime);
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
         levelController = lvlController.GetComponent<LevelController>();
-        if (!collision.isTrigger && collision.gameObject.tag != "Player") 
+        if (!collision.isTrigger && collision.gameObject.tag != "Player" && g1 == 1 && collision.gameObject.tag != "SwarmCollider") 
         {
+            g1 = 0;
             EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
             enemy.ChangeHP(25);
             // timer = 90;
@@ -45,10 +61,9 @@ public class FriendBullet : MonoBehaviour
                 //PlayerPrefs.SetInt("Coin", PlayerPrefs.GetInt("Coin") + 10);
 
 
-            } 
-           
-          
+            }
 
+            //g = 1;
             Destroy(this.gameObject);
         }
       // Destroy(this.gameObject);

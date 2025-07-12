@@ -51,7 +51,7 @@ public class Shooter_AI : MonoBehaviour
                 shooter.enabled = true;
             }
         }
-        print(distantion);
+        //print(distantion);
         
     }
   

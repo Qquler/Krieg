@@ -5,14 +5,14 @@ using UnityEngine;
 public class Poit_to_mouse : MonoBehaviour
     
 {
-    private SpriteRenderer Spr;
+    public SpriteRenderer Spr;
     public float offset;
    public GameObject arm;
     public GameObject gunPoint;
     // Start is called before the first frame update
     void Start()
     {
-        Spr = GetComponent<SpriteRenderer>();
+        //Spr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -32,13 +32,13 @@ public class Poit_to_mouse : MonoBehaviour
         if (arm.transform.localEulerAngles.z < 0 || arm.transform.localEulerAngles.z > 180)
         {
             Flip(false);
-            gunPoint.transform.localPosition = new Vector3(-0.23f, gunPoint.transform.localPosition.y, gunPoint.transform.localPosition.z);
+            //gunPoint.transform.localPosition = new Vector3(-0.23f, gunPoint.transform.localPosition.y, gunPoint.transform.localPosition.z);
         }
         if (arm.transform.localEulerAngles.z > 0 && arm.transform.localEulerAngles.z < 180)
         {
 
             Flip(false);
-            gunPoint.transform.localPosition =new Vector3(0.16f, gunPoint.transform.localPosition.y, gunPoint.transform.localPosition.z);
+            //gunPoint.transform.localPosition =new Vector3(0.16f, gunPoint.transform.localPosition.y, gunPoint.transform.localPosition.z);
         }
         void Flip(bool boll)
         {
