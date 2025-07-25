@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
         float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
 
-        Debug.Log(h);
+        //Debug.Log(h);
 
         var direction = new Vector2(h, v);
         //rb.MovePosition(rb.position + direction.normalized * speed * Time.deltaTime);

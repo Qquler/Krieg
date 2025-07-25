@@ -34,13 +34,13 @@ public class Player1 : MonoBehaviour
         curHP = fullHP;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        //HPText.text = curHP.ToString() + " / " + fullHP.ToString();     //ТОЖЕ НУЖНО
+        //HPText.text = curHP.ToString() + " / " + fullHP.ToString();     //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     }
 
     // Update is called once per frame
     void Update()
     {
-    //  Flip(); //Надо вернуть //// Не надо вернуть
+    //  Flip(); //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ //// пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 
         //if (Input.GetKeyDown(KeyCode.Space))
@@ -54,7 +54,7 @@ public class Player1 : MonoBehaviour
         //    animator.SetInteger("State", 2);
         //    //speed = speed + 10;
         //}
-        //else if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)                                          ////АНИМАЦИИ
+        //else if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)                                          ////пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         //{
         //    animator.SetInteger("State", 0);
         //}
@@ -85,8 +85,8 @@ public class Player1 : MonoBehaviour
                     {
                         fs = 1;
                     }
-                    rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (movment) / fs, rb.velocity.y);
-                    rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (movment) / fs);
+                    rb.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * (movment) / fs, rb.linearVelocity.y);
+                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, Input.GetAxis("Vertical") * (movment) / fs);
 
                     metrics = fs;
                     //rb.velocity = new Vector2(rb.velocity.x, );
@@ -96,8 +96,8 @@ public class Player1 : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (speed), rb.velocity.y);
-            rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed));
+            rb.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * (speed), rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Input.GetAxis("Vertical") * (speed));
         }
     }
     //void CheckGround()
@@ -123,7 +123,7 @@ public class Player1 : MonoBehaviour
         {
             curHP -= deltaHP;
             // print(curHP);
-            //HPText.text = curHP.ToString() + " / " + fullHP.ToString();    //НУЖНО, это полоска хп
+            //HPText.text = curHP.ToString() + " / " + fullHP.ToString();    //пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
             //AudioController.PlaySound();
             StartCoroutine(Waiting());
         }
@@ -143,15 +143,15 @@ public class Player1 : MonoBehaviour
     IEnumerator Waiting()
     {
         canBeat = true;
-        yield return new WaitForSeconds(waitTime); //строка ожидания
+        yield return new WaitForSeconds(waitTime); //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         canBeat = true;
     }
     IEnumerator WaitingCharge()
     {
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (speed + 8), rb.velocity.y);
-        rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed + 8));
+        rb.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * (speed + 8), rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, Input.GetAxis("Vertical") * (speed + 8));
 
-        yield return new WaitForSeconds(waitTimeCharge); //строка ожидания
+        yield return new WaitForSeconds(waitTimeCharge); //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         canCharge = false;
         StartCoroutine(WaitingCharge1());
     }
@@ -160,7 +160,7 @@ public class Player1 : MonoBehaviour
         //rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (speed), rb.velocity.y);
         //rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed));
 
-        yield return new WaitForSeconds(waitTimeCharge1); //строка ожидания
+        yield return new WaitForSeconds(waitTimeCharge1); //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         canCharge = true;
     }
 } 
