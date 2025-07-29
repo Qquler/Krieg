@@ -8,7 +8,7 @@ public class Poit_to_Player : MonoBehaviour
     private SpriteRenderer Spr;
     public float offset;
     public GameObject arm;
-    private Vector3 player;
+    //private Vector3 player;
     private Shooter_AI ai;
     public bool IsNecron = false;
     int ChAngle;
@@ -24,13 +24,13 @@ public class Poit_to_Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        player = ai.getTarget();
-        
+
+       
         //Debug.Log(player.ToString());
         ChAngle = Random.Range(-1 * angle, angle);
         //Player player = gameObject<Player>();
 
-        Vector3 difference = player - transform.position;
+        Vector3 difference = ai.getTargetforShooting();
         float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
 
         if (IsNecron == true)
@@ -39,7 +39,7 @@ public class Poit_to_Player : MonoBehaviour
         }
         else
         {
-            transform.rotation = Quaternion.Euler(0f, transform.rotation.y, rotZ + offset + ChAngle);
+            transform.rotation = Quaternion.Euler(0f, transform.rotation.y, rotZ * Time.deltaTime + offset + ChAngle);
         }
 
 

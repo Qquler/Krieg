@@ -18,6 +18,7 @@ public class MovePoint : MonoBehaviour
     public float waitTime1 = 2f;
     private bool stay = false;
 
+    [SerializeField] private float maxDist;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +39,7 @@ public class MovePoint : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         var direction = new Vector2(h, v);
         rb.MovePosition(rb.position + direction.normalized * (speed) * Time.deltaTime);
-        if (h< 0.1f && h > -0.1f && v < 0.1f && v> -0.1f) 
+        if (Mathf.Abs(h) < 0.1f && Mathf.Abs(v) < 0.1f) 
         {
             stay = true;
         }
@@ -49,7 +50,7 @@ public class MovePoint : MonoBehaviour
         distantion = Vector3.Distance(transform.position, target.position);
         //Vector3.Distance();
       
-        if (distantion > 1f)
+        if (distantion > maxDist)
         {
             //// GetComponent<Shooter>().enabled = true;
             //Vector3 direction1 = transform.position - target.position;
