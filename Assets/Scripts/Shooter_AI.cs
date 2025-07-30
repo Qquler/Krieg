@@ -7,6 +7,7 @@ public class Shooter_AI : EnemyController
 
     public float speed1 = 4f;
     public float speed2 = 6f;
+    //a
 
     [SerializeField] private Transform target;
     [SerializeField] private Transform targetShooting;
