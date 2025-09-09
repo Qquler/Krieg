@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooter_AI : EnemyController
+public class Shooter_AI : MonoBehaviour
 {
 
     public float speed1 = 4f;
@@ -52,7 +52,7 @@ public class Shooter_AI : EnemyController
 
         }
         
-        Debug.Log(isplayervisible());
+        //Debug.Log(isplayervisible());
         RaycastHit2D hit;
         Vector2 directionToPlayer = (target.position - transform.position);
         directionToPlayer.Normalize();
@@ -91,7 +91,7 @@ public class Shooter_AI : EnemyController
                 direction.Normalize();
 
                 // Перемещение объекта
-                transform.position += direction * speed2 * Time.deltaTime;
+                transform.position = Vector2.MoveTowards(transform.position, direction, speed2 * Time.deltaTime);
             }
             else if (distantion > distanceOfmoving)
             {

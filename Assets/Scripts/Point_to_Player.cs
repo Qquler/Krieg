@@ -5,6 +5,7 @@ using UnityEngine;
 public class Poit_to_Player : MonoBehaviour
 
 {
+    [SerializeField] GameObject lvlController;
     private SpriteRenderer Spr;
     public float offset;
     public GameObject arm;

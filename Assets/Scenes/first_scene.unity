@@ -439,23 +439,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31b512a34715cb4c8836b2486bf497b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lvlController: {fileID: 141919638}
-  waitTime: 1
-  waitTimeHeal: 2
   fullHP: 100
   curHP: 0
-  damage: 0
-  heal: 10
-  bullet: {fileID: 2498618171028045305, guid: 9c4f5a1b147113c498d64f282c1aa820, type: 3}
-  gunPoint: {fileID: 1940869973}
-  newSprite: {fileID: 21300000, guid: 69d215624e4daca4f81d5ad57449baf9, type: 3}
-  newSprite1: {fileID: 21300000, guid: 9b5467a8d6927c34a97c088cb9bd18e8, type: 3}
-  spriteRenderer: {fileID: 416809263}
---- !u!212 &416809263 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 7639919062474367201, guid: f8485596d03e5b54d99aedbcfcb50a0d, type: 3}
-  m_PrefabInstance: {fileID: 651642601}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &416809265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,18 +453,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68ce325895148f4f80508a6b3808689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lvlController: {fileID: 0}
-  waitTime: 1
-  waitTimeHeal: 2
   fullHP: 100
   curHP: 0
-  damage: 0
-  heal: 10
-  bullet: {fileID: 0}
-  gunPoint: {fileID: 0}
-  newSprite: {fileID: 0}
-  newSprite1: {fileID: 0}
-  spriteRenderer: {fileID: 0}
   speed1: 1
   speed2: 1
   target: {fileID: 7392092963501319641}
@@ -25405,7 +25380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2785258922563480714, guid: f8485596d03e5b54d99aedbcfcb50a0d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4249538614698194125, guid: f8485596d03e5b54d99aedbcfcb50a0d, type: 3}
       propertyPath: m_Name
@@ -25444,6 +25419,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8724334712584527948, guid: f8485596d03e5b54d99aedbcfcb50a0d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724334712584527948, guid: f8485596d03e5b54d99aedbcfcb50a0d, type: 3}
       propertyPath: lvlController
       value: 
       objectReference: {fileID: 141919638}
@@ -25471,14 +25450,72 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8724334712584527948, guid: f8485596d03e5b54d99aedbcfcb50a0d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1261936683504435167, guid: f8485596d03e5b54d99aedbcfcb50a0d, type: 3}
       insertIndex: 2
       addedObject: {fileID: 597929317}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2785258922563480714, guid: f8485596d03e5b54d99aedbcfcb50a0d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1548945832}
+    - targetCorrespondingSourceObject: {fileID: 2785258922563480714, guid: f8485596d03e5b54d99aedbcfcb50a0d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1548945840}
   m_SourcePrefab: {fileID: 100100000, guid: f8485596d03e5b54d99aedbcfcb50a0d, type: 3}
+--- !u!4 &1548945829 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4681424479801529257, guid: f8485596d03e5b54d99aedbcfcb50a0d, type: 3}
+  m_PrefabInstance: {fileID: 1548945828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1548945830 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2785258922563480714, guid: f8485596d03e5b54d99aedbcfcb50a0d, type: 3}
+  m_PrefabInstance: {fileID: 1548945828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1548945831 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7639919062474367201, guid: f8485596d03e5b54d99aedbcfcb50a0d, type: 3}
+  m_PrefabInstance: {fileID: 1548945828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1548945832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548945830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 169259a99555f0547be4dc807c698e1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 1
+  waitTimeHeal: 2
+  damage: 0
+  heal: 10
+  th: {fileID: 0}
+  newSprite: {fileID: 21300000, guid: 9b5467a8d6927c34a97c088cb9bd18e8, type: 3}
+  newSprite1: {fileID: 21300000, guid: 69d215624e4daca4f81d5ad57449baf9, type: 3}
+  spriteRenderer: {fileID: 1548945831}
+  bullet: {fileID: 2498618171028045305, guid: 9c4f5a1b147113c498d64f282c1aa820, type: 3}
+  gunPoint: {fileID: 1548945829}
+--- !u!114 &1548945840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548945830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f31b512a34715cb4c8836b2486bf497b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullHP: 100
+  curHP: 100
 --- !u!4 &1620012979 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5330107475651891601, guid: 6fa16623e247cb14aae522bbb4636f80, type: 3}
@@ -25630,11 +25667,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa16623e247cb14aae522bbb4636f80, type: 3}
---- !u!4 &1940869973 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2982975873524317849, guid: f8485596d03e5b54d99aedbcfcb50a0d, type: 3}
-  m_PrefabInstance: {fileID: 1548945828}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1960877857
 GameObject:
   m_ObjectHideFlags: 0
@@ -28691,7 +28723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2065411975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28734,7 +28766,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2065411974}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 123a9ef8d5bf8f8499fb8314e4f00505, type: 3}
   m_Name: 
@@ -29276,11 +29308,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 442c2d67a720acf40a71d3493aa5dd89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lvlController: {fileID: 141919638}
   waitTime: 1
   waitTimeCharge: 0.2
   waitTimeCharge1: 1
-  speed: 1
-  isPlayer: 1
+  speed: 0
   jumpHeight: 0
   canBeat: 1
   canCharge: 1
