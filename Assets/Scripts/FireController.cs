@@ -11,11 +11,12 @@ public class FireController : MonoBehaviour
 
     private float waitTime1 = 0.75f;
 	private float waitTime2 = 0.20f;
-
+    public float reloadTime = 2f;
+    public int ammo = 25;
 	bool canBeat;
 	bool canBeat1;
-	//bool canBeat2;
-   
+    //bool canBeat2;
+    private bool reloading = false;
     public float speed = 30; // скорость пули
 	public Rigidbody2D bulletLas;
     public Rigidbody2D bulletBul;// префаб нашей пули
@@ -42,7 +43,12 @@ public class FireController : MonoBehaviour
             gun = 2;
         }
         //print(canBeat);
-        if (Input.GetMouseButton(0) && canBeat==true && gun == 1)
+        if (Input.GetKeyDown(KeyCode.R) && reloading == false)
+        {
+            reloading = true;
+            StartCoroutine(Reload());
+        }
+            if (Input.GetMouseButton(0) && canBeat==true && gun == 1 && ammo > 0 && reloading == false)
 		{
 			if (canBeat==true)
 			{
@@ -95,6 +101,7 @@ public class FireController : MonoBehaviour
 
 	void Fire()
 	{
+        ammo -= 1;
 		Rigidbody2D clone = Instantiate(bulletLas, gunPoint.position, gunPoint.rotation);
         //clone.velocity = transform.TransformDirection(gunPoint. * speed);
         //clone.transform.right = gunPoint.right;
@@ -112,6 +119,12 @@ public class FireController : MonoBehaviour
 		yield return new WaitForSeconds(waitTime1); //строка ожидания
 		canBeat = true;
 	}
+    IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(reloadTime); //строка ожидания
+        reloading = false;
+        ammo = 25;
+    }
     IEnumerator Waiting1()
     {
         //строка ожидания
