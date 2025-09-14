@@ -8,6 +8,7 @@ public class FriendBullet : MonoBehaviour
     Rigidbody2D rb;
     // [SerializeField] GameObject lvlController;
     [SerializeField] GameObject lvlController;
+    [SerializeField] int dmg = 25;
     LevelController levelController;
     public Transform bulletPoint;
     public float sped;
@@ -17,6 +18,7 @@ public class FriendBullet : MonoBehaviour
     public float speed = 1f;
     private float g = 0;
     private float g1 = 1;
+    
 
     void Start()
     {
@@ -45,28 +47,37 @@ public class FriendBullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         levelController = lvlController.GetComponent<LevelController>();
-        if (!collision.isTrigger && collision.gameObject.tag != "Player" && g1 == 1 && collision.gameObject.tag != "SwarmCollider") 
+        if (!collision.isTrigger && collision.gameObject.tag != "Player" && g1 == 1 && collision.gameObject.tag != "SwarmCollider")
         {
             g1 = 0;
-            EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
-            enemy.ChangeHP(25);
+            //EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
+            //EnemyController enemy;
+
+
+            collision.gameObject.TryGetComponent(out EnemyController enemy);
+            //collision.gameObject.GetComponent<EnemyController>();
+            //Debug.Log(enemy.curHP);
+            enemy.ChangeHP(dmg);
+
             // timer = 90;
 
-            if (enemy.curHP <= 0)
-            {
-                Destroy(collision.gameObject);
-                //Rigidbody2D clone = Instantiate(coin, coinPoint.position, coinPoint.rotation);
-                //levelController.coinText.text =
-                //      (int.Parse(levelController.coinText.text) + 10).ToString();
-                //PlayerPrefs.SetInt("Coin", PlayerPrefs.GetInt("Coin") + 10);
+
+            //Rigidbody2D clone = Instantiate(coin, coinPoint.position, coinPoint.rotation);
+            //levelController.coinText.text =
+            //      (int.Parse(levelController.coinText.text) + 10).ToString();
+            //PlayerPrefs.SetInt("Coin", PlayerPrefs.GetInt("Coin") + 10);
 
 
-            }
+
 
             //g = 1;
             Destroy(this.gameObject);
         }
-      // Destroy(this.gameObject);
+        else if (collision.gameObject.tag == "Wall")
+        {
+            Destroy(this.gameObject);
+            // Destroy(this.gameObject);
+        }
     }
    
 }

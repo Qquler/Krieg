@@ -148,8 +148,8 @@ public class Player1 : MonoBehaviour
     }
     IEnumerator WaitingCharge()
     {
-        rb.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * (speed + 8), rb.linearVelocity.y);
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, Input.GetAxis("Vertical") * (speed + 8));
+        rb.linearVelocity = new Vector2(Input.GetAxis("Horizontal") * (speed + jumpHeight), rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, Input.GetAxis("Vertical") * (speed + jumpHeight));
 
         yield return new WaitForSeconds(waitTimeCharge); //������ ��������
         canCharge = false;

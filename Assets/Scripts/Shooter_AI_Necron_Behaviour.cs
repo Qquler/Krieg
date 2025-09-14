@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooter_AI: MonoBehaviour
+public class Shooter_AI_Necron_Behaviour : MonoBehaviour
 {
 
     public float speed1 = 4f;
@@ -15,7 +15,7 @@ public class Shooter_AI: MonoBehaviour
     [SerializeField] private float distanceOfshooting = 8f;//тут и так понятно
     [SerializeField] private float distanceOfmoving = 6f; // дистанция дальше которой противник начинает наступать
     private bool isPlayerVisible = false; // нет ли между игроком и врагом стены
-    private float damping = 100; //скорость поворота
+    [SerializeField] private float damping = 100; //скорость поворота
     public float offset;
     public GameObject arm;
     public int angle = 0;
@@ -23,10 +23,11 @@ public class Shooter_AI: MonoBehaviour
     Shooter shooter;
     private Vector2 newPosition = Vector2.zero;
     public float distantion;
-    
+
     void Start()
     {
         shooter = this.GetComponent<Shooter>();
+        newPosition = transform.position;
         //poit = this.GetComponent<Poit_to_Player>();
 
     }
@@ -50,21 +51,21 @@ public class Shooter_AI: MonoBehaviour
         }
         else
         {
-            Poin_to_player(getTargetforShooting(), 6);
+            Poin_to_player(getTargetforShooting(), damping);
 
         }
-        
+
         //Debug.Log(isplayervisible());
         RaycastHit2D hit;
         Vector2 directionToPlayer = (target.position - transform.position);
         directionToPlayer.Normalize();
-        hit = Physics2D.Raycast(transform.position, directionToPlayer, distanceOfview);
+        hit = Physics2D.Raycast(transform.position, directionToPlayer, distanceOfview, 31);
 
         Debug.DrawRay(transform.position, getTargetforShooting() * distanceOfview);
         if (hit != null)
         {
             //Debug.Log("FFF");
-           
+
             if (hit.collider.CompareTag("Player"))
             {
                 isPlayerLost = false;
@@ -80,8 +81,8 @@ public class Shooter_AI: MonoBehaviour
                 newPosition = Vector3.Lerp(transform.position, newPosition, distantion / indent);
             }
         }
-       
-          //newPositio = target.position;
+
+        //newPositio = target.position;
         //Vector3.Distance();
         if (isplayervisible())
         {
@@ -133,12 +134,12 @@ public class Shooter_AI: MonoBehaviour
         //print(distantion);
 
     }
-    
+
     public Vector2 getTargetforShooting()
     {
         if (isplayervisible())
         {
-            return  targetShooting.position - transform.position;
+            return targetShooting.position - transform.position;
         }
         else
         {

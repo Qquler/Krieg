@@ -10,7 +10,9 @@
 //    [SerializeField] MenuController menuController;
 //    private void Start()
 //    {
-//        PlayerPrefs.GetFloat(menuController.SOUND);            // Всё раскомментировать
+//        PlayerPrefs.GetFloat(menuController.SOUND);
+////        Всё раскомментировать
+////Услышал тебя
 //    }
 //    public void PlayAudio(AudioClip audioClip)
 //    {

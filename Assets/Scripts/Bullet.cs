@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 
     Rigidbody2D rb;
     [SerializeField] GameObject lvlController;
+    [SerializeField] private int damage = 15;
     public Transform bulletPoint;
     public float sped;
     public float g = 1;
@@ -31,7 +32,7 @@ public class Bullet : MonoBehaviour
             Player player = collision.gameObject.GetComponent<Player>();
             if (g == 1) 
             {
-                player.ChangeHP(15);
+                player.ChangeHP(damage);
               //  player.curHP = 0;                                                ////Œ¡ﬂ«¿“≈À‹ÕŒ »—œŒÀ‹«Œ¬¿“‹ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 g = 0;
                 // timer = 90;

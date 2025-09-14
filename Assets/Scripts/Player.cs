@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+
 public class Player : MonoBehaviour
 {
+    [SerializeField] GameObject lvlController;
     public float waitTime = 1f;
     public float waitTimeCharge = 0.2f;
     public float waitTimeCharge1 = 1f;
@@ -13,7 +15,6 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     public float speed;
-    public bool isPlayer;
     public float jumpHeight;
     public bool canBeat = true;
     public bool canCharge = true;
@@ -64,14 +65,30 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (this.CurHP() <= 0)
+        {
+            lvlController.GetComponent<LevelController>().Lose();
+        }
         float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
+        if (Mathf.Abs(v) < 0.1)
+        {
+            v = 0f;
+        }
+        if (Mathf.Abs(h) < 0.1)
+        {
+            h = 0f;
+        }
+        var direction = new Vector2(h, v);
 
         //Debug.Log(h);
 
-        var direction = new Vector2(h, v);
-        //rb.MovePosition(rb.position + direction.normalized * speed * Time.deltaTime);
 
+        //if(Mathf.Abs(v) < 0.1 && Mathf.Abs(h) < 0.1){
+        //    direction = Vector2;
+        //}
+        //rb.MovePosition(rb.position + direction.normalized * speed * Time.deltaTime);
+        //Debug.Log(direction.normalized);
         if (canCharge == true) 
         { 
         
@@ -169,8 +186,16 @@ public class Player : MonoBehaviour
     {
         float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
+        if (Mathf.Abs(v) < 0.1)
+        {
+            v = 0f;
+        }
+        if (Mathf.Abs(h) < 0.1)
+        {
+            h = 0f;
+        }
         var direction = new Vector2(h, v);
-        rb.MovePosition(rb.position + direction.normalized * (speed + 8) * Time.deltaTime);
+        rb.MovePosition(rb.position + direction.normalized * (jumpHeight) * Time.deltaTime);
         //rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (speed + 8), rb.velocity.y);
         //rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed + 8));
 

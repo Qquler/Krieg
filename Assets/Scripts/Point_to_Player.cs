@@ -5,11 +5,12 @@ using UnityEngine;
 public class Poit_to_Player : MonoBehaviour
 
 {
+    [SerializeField] GameObject lvlController;
     private SpriteRenderer Spr;
     public float offset;
     public GameObject arm;
     //private Vector3 player;
-    private Shooter_AI ai;
+    private Shooter_AI_Necron_Behaviour ai;
     public bool IsNecron = false;
     int ChAngle;
     public int angle = 0;
@@ -17,7 +18,7 @@ public class Poit_to_Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ai = this.GetComponent<Shooter_AI>();
+        ai = this.GetComponent<Shooter_AI_Necron_Behaviour>();
         Spr = GetComponent<SpriteRenderer>();
     }
 
