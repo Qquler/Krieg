@@ -13,8 +13,8 @@ public class Necron_Controller : MonoBehaviour
     public int heal = 10;
     private int g = 0;
     public EnemyController enemyController;
-    public Sprite newSprite;
     public Sprite newSprite1;
+    public Sprite newSprite;
     public SpriteRenderer spriteRenderer;
     public const int fullHP = 100;
     //public Rigidbody2D bullet;

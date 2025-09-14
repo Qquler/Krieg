@@ -27,6 +27,9 @@ public class Swarm_Allocation : MonoBehaviour
             fr.position = Vector2.MoveTowards(fr.position, new Vector2(this.transform.position.x+(R/3),this.transform.position.y), speed * Time.deltaTime);
             sc.position = Vector2.MoveTowards(sc.position, new Vector2(this.transform.position.x - (R / 3), this.transform.position.y), speed * Time.deltaTime);
             //Debug.Log(fr.position);
+        }else if( c == 0)
+        {
+            Destroy(this.gameObject); 
         }
         else
         {

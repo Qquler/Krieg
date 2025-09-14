@@ -105,9 +105,12 @@ public class FireController : MonoBehaviour
 
     void Fire()
     {
-      
+        int offset = -90;
+        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        var rotat = Quaternion.Euler(0f, transform.rotation.y, rotZ + offset);
         au.PlayAudio(LasGun_Shoot, volume);
-        Rigidbody2D clone = Instantiate(bulletLas, gunPoint.position, gunPoint.rotation);
+        Rigidbody2D clone = Instantiate(bulletLas, gunPoint.position, rotat);
         //clone.velocity = transform.TransformDirection(gunPoint. * speed);
         //clone.transform.right = gunPoint.right;
         //PlayAudio(sound1);
