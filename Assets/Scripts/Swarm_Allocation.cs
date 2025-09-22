@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Swarm_Allocation : MonoBehaviour
@@ -5,14 +7,35 @@ public class Swarm_Allocation : MonoBehaviour
     [SerializeField] private int speed = 1;
     [SerializeField] private float R = 1f;
     private GameObject Scarab;
+    private bool animTimeCh = true;
 
     void Start()
     {
         Scarab = this.transform.Find("Scarab").gameObject;
+        
+
+    }
+    IEnumerator WaitingAnimTimeCh()
+    {
+        yield return new WaitForSeconds(0.5f);
+        animTimeCh = true;
     }
     void Update()
     {
-        
+        // тестовый вариант анимации
+        if (animTimeCh)
+        {
+
+            foreach (Transform sca in Scarab.transform)
+            {
+                float rand = Random.value;
+                Animator anim = sca.gameObject.GetComponent<Animator>();
+                anim.speed = 0.9f + (rand / 2);
+            }
+            animTimeCh = false;
+            StartCoroutine(WaitingAnimTimeCh());
+        }
+        //
         int c = Scarab.transform.childCount;
         if (c == 1)
         {

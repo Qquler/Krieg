@@ -69,7 +69,7 @@ public class Shooter : MonoBehaviour
 void Fire()
     {
         au.PlayAudio(LasGun_Shoot, volume);
-        Rigidbody2D clone = Instantiate(bullet, gunPoint.position, gunPoint.rotation);   // третье, которое rotation       //Quaternion.Euler(gunPoint.rotation.x, gunPoint.rotation.y, gunPoint.rotation.z));
+        Rigidbody2D clone = Instantiate(bullet, gunPoint.position, this.gameObject.transform.rotation);   // третье, которое rotation       //Quaternion.Euler(gunPoint.rotation.x, gunPoint.rotation.y, gunPoint.rotation.z));
         //clone.velocity = transform.TransformDirection(gunPoint. * speed);
         //clone.transform.right = gunPoint.right;
 

@@ -34,13 +34,14 @@ public class Pointing_on_Player : MonoBehaviour
             //m_LastCheck = CheckPeriod;
 
 
-            Debug.Log("de");
+            //Debug.Log("de");
             ChAngle = Random.Range(-1 * angle, angle);
             //Player player = gameObject<Player>();
 
             Vector2 target = cntrl.GetTarget();
             Debug.Log(target);
-            float rotZ = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
+        Debug.DrawRay(transform.position, cntrl.GetTarget() * 100);
+        float rotZ = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
 
             //transform.rotation = Quaternion.Euler(0f, transform.rotation.y, rotZ * Time.deltaTime * speed + offset);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, transform.rotation.y, (rotZ + offset + ChAngle)), Time.deltaTime * speed);
