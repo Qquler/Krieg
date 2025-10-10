@@ -6,21 +6,28 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
+    private GameObject posTomb;
+    private bool toEnableActivityAfterTomb;
+
+
     [SerializeField] GameObject lvlController;
     public float waitTime = 1f;
     public float waitTimeCharge = 0.2f;
     public float waitTimeCharge1 = 1f;
     //bool canBeat = true;
     //чел, нейроликтер - руина
-    Rigidbody2D rb;
-    Animator animator;
+    public Rigidbody2D rb;
+    public Animator animator;
+    public FireController fc;
     public float speed;
+    public float runspeed;
     public float jumpHeight;
     public bool canBeat = true;
     public bool canCharge = true;
     public bool canCharge1 = true;
     public int fullHP = 100;
     [SerializeField] private int curHP;
+    private bool canMove = true;
     
     //public TMP_Text HPText;
     //[SerializeField] AudioController AudioController;
@@ -33,11 +40,13 @@ public class Player : MonoBehaviour
     {
         curHP = fullHP;
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        GameObject plfam = this.transform.Find("PlayerForAnim").gameObject;
+        animator = plfam.GetComponent<Animator>();
+        fc = GetComponent<FireController>();
         //HPText.text = curHP.ToString() + " / " + fullHP.ToString();     //ТОЖЕ НУЖНО
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
     //  Flip(); //Надо вернуть //// Не надо вернуть
@@ -69,6 +78,49 @@ public class Player : MonoBehaviour
         {
             lvlController.GetComponent<LevelController>().Lose();
         }
+        
+
+        if(posTomb != null)
+        {
+            //Debug.Log("yes");
+            toEnableActivityAfterTomb = true;
+            this.GetComponent<FireController>().CanShoot(false);
+            this.CanMove(false);
+            this.rb.simulated = false;
+            float v = Input.GetAxis("Vertical");
+            float h = Input.GetAxis("Horizontal");
+            bool t = Input.GetKey(KeyCode.Space);
+            //Debug.Log(h.ToString() + v.ToString() + t.ToString());
+            if(Mathf.Abs(v) > 0.1 || Mathf.Abs(h) > 0.1 || t)
+            {
+                //Debug.Log("yes");
+                posTomb.GetComponent<TombScript>().LeaveTombOutsideF();
+            }
+        }
+
+        if(posTomb == null && toEnableActivityAfterTomb)
+        {
+            toEnableActivityAfterTomb = false;
+            this.GetComponent<FireController>().CanShoot(true);
+            this.CanMove(true);
+            this.rb.simulated = true;
+        }
+        
+
+       
+        if (canMove)
+        {
+            Mooving();
+        }
+    }
+    //void CheckGround()
+    //{
+    //    Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, 0.2f);
+
+    //    isGrounded = colliders.Length > 1;
+    //}
+    void Mooving()
+    {
         float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
         if (Mathf.Abs(v) < 0.1)
@@ -80,18 +132,9 @@ public class Player : MonoBehaviour
             h = 0f;
         }
         var direction = new Vector2(h, v);
+        if (canCharge == true)
+        {
 
-        //Debug.Log(h);
-
-
-        //if(Mathf.Abs(v) < 0.1 && Mathf.Abs(h) < 0.1){
-        //    direction = Vector2;
-        //}
-        //rb.MovePosition(rb.position + direction.normalized * speed * Time.deltaTime);
-        //Debug.Log(direction.normalized);
-        if (canCharge == true) 
-        { 
-        
             if (Input.GetKey(KeyCode.Space))
             {
                 canCharge1 = false;
@@ -101,13 +144,13 @@ public class Player : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
-                    rb.MovePosition(rb.position + direction.normalized * (speed + 2) * Time.deltaTime);
+                    rb.MovePosition(rb.position + direction.normalized * (runspeed) * Mathf.Sqrt(Time.deltaTime));
                     //rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (speed + 2), rb.velocity.y);
                     //rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed + 2));
                 }
                 else
                 {
-                    rb.MovePosition(rb.position + direction.normalized * (speed) * Time.deltaTime);
+                    rb.MovePosition(rb.position + direction.normalized * (speed) * Mathf.Sqrt(Time.deltaTime));
                     //rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
                     //rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * speed);
                 }
@@ -117,13 +160,13 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftShift) && canCharge1 == true)
             {
-                rb.MovePosition(rb.position + direction.normalized * (speed + 2) * Time.deltaTime);
+                rb.MovePosition(rb.position + direction.normalized * (runspeed) * Mathf.Sqrt(Time.deltaTime));
                 //rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (speed + 2), rb.velocity.y);
                 //rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed + 2));
             }
             else if (canCharge1 == true)
             {
-                rb.MovePosition(rb.position + direction.normalized * (speed) * Time.deltaTime);
+                rb.MovePosition(rb.position + direction.normalized * (speed) * Mathf.Sqrt(Time.deltaTime));
                 //rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
                 //rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * speed);
             }
@@ -131,12 +174,6 @@ public class Player : MonoBehaviour
             //rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed));
         }
     }
-    //void CheckGround()
-    //{
-    //    Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, 0.2f);
-
-    //    isGrounded = colliders.Length > 1;
-    //}
     void Flip()
     {
         if (Input.GetAxis("Horizontal") > 0)
@@ -176,6 +213,13 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+    public void PosTomb(GameObject i)
+    {
+        posTomb = i;
+    }    public void CanMove(bool i)
+    {
+        canMove = i;
+    }
     IEnumerator Waiting()
     {
         canBeat = true;
@@ -195,7 +239,7 @@ public class Player : MonoBehaviour
             h = 0f;
         }
         var direction = new Vector2(h, v);
-        rb.MovePosition(rb.position + direction.normalized * (jumpHeight) * Time.deltaTime);
+        rb.MovePosition(rb.position + direction.normalized * (jumpHeight) * Mathf.Sqrt(Time.deltaTime)*waitTimeCharge);
         //rb.velocity = new Vector2(Input.GetAxis("Horizontal") * (speed + 8), rb.velocity.y);
         //rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * (speed + 8));
 

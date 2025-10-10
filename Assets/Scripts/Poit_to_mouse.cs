@@ -9,9 +9,11 @@ public class Poit_to_mouse : MonoBehaviour
     public float offset;
    public GameObject arm;
     public GameObject gunPoint;
+    Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         //Spr = GetComponent<SpriteRenderer>();
     }
 
@@ -27,7 +29,7 @@ public class Poit_to_mouse : MonoBehaviour
         {
 
         }
-        transform.rotation = Quaternion.Euler(0f, transform.rotation.y, rotZ + offset);
+        rb.MoveRotation(Quaternion.Euler(0f, transform.rotation.y, rotZ + offset));
         //print(arm.transform.localEulerAngles.z);
         if (arm.transform.localEulerAngles.z < 0 || arm.transform.localEulerAngles.z > 180)
         {

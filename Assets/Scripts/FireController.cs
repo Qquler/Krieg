@@ -17,6 +17,7 @@ public class FireController : MonoBehaviour
     public int ammo = 25;
     bool canBeat;
     bool canBeat1;
+    bool canShoot = true; //For outside scripts
     //bool canBeat2;
     private bool reloading = false;
     public float speed = 30; // ñêîðîñòü ïóëè
@@ -37,37 +38,42 @@ public class FireController : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKey(KeyCode.Alpha1))
+        if (canShoot)
         {
-            gun = 1;
-        }
-        if (Input.GetKey(KeyCode.Alpha2))
-        {
-            gun = 2;
-        }
-        //print(canBeat);
-        if (Input.GetKeyDown(KeyCode.R) && reloading == false)
-        {
-            reloading = true;
-            StartCoroutine(Reload());
-        }
-        if (Input.GetMouseButton(0) && canBeat == true && gun == 1 && ammo > 0 && reloading == false)
-        {
-            if (canBeat == true)
+
+
+            if (Input.GetKey(KeyCode.Alpha1))
             {
-                Fire();
-                ammo -= 1;
-                canBeat = false;
-                StartCoroutine(Waiting());
+                gun = 1;
             }
-        }
-        if (Input.GetMouseButton(0) && canBeat1 == true && gun == 2)
-        {
-            if (canBeat == true)
+            if (Input.GetKey(KeyCode.Alpha2))
             {
-                Fire1();
-                canBeat1 = false;
-                StartCoroutine(Waiting1());
+                gun = 2;
+            }
+            //print(canBeat);
+            if (Input.GetKeyDown(KeyCode.R) && reloading == false)
+            {
+                reloading = true;
+                StartCoroutine(Reload());
+            }
+            if (Input.GetMouseButton(0) && canBeat == true && gun == 1 && ammo > 0 && reloading == false)
+            {
+                if (canBeat == true)
+                {
+                    Fire();
+                    ammo -= 1;
+                    canBeat = false;
+                    StartCoroutine(Waiting());
+                }
+            }
+            if (Input.GetMouseButton(0) && canBeat1 == true && gun == 2)
+            {
+                if (canBeat == true)
+                {
+                    Fire1();
+                    canBeat1 = false;
+                    StartCoroutine(Waiting1());
+                }
             }
         }
         //else if (Input.GetMouseButton(0) && canBeat1 == true && IsRightHand == true)
@@ -157,4 +163,8 @@ public class FireController : MonoBehaviour
     //{
     //	PlayAudio(sound1);
     //}
+    public void CanShoot(bool sh)
+    {
+        canShoot = sh;
+    }
 }
