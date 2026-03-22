@@ -65,7 +65,7 @@ public class Shooter_AI_Necron_Behaviour : MonoBehaviour
         if (hit != null)
         {
             //Debug.Log("FFF");
-
+            //
             if (hit.collider.CompareTag("Player"))
             {
                 isPlayerLost = false;

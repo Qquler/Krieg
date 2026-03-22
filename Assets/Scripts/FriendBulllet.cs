@@ -47,7 +47,11 @@ public class FriendBullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         levelController = lvlController.GetComponent<LevelController>();
-        if (!collision.isTrigger && collision.gameObject.tag != "Player" && g1 == 1 && collision.gameObject.tag != "SwarmCollider")
+        if (collision.gameObject.tag == "Wall")
+        {
+            Destroy(this.gameObject);
+        }
+        else if (!collision.isTrigger && collision.gameObject.tag != "Player" && g1 == 1 && collision.gameObject.tag != "SwarmCollider")
         {
             g1 = 0;
             //EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();

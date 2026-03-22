@@ -14,6 +14,7 @@ public class TombScript : MonoBehaviour
     //Scarab = this.transform.Find("Scarab").gameObject;
     // Start is called once before the first execution of Update after the MonoBehaviour is createdý
     private Transform cap;
+    private bool wasThere = false;
     private Transform standPose;
     private Transform standPose1;
     private Transform standPose2;
@@ -25,10 +26,11 @@ public class TombScript : MonoBehaviour
     public float speed1;
     public float speedl;
     public float delay;
+    public float delayl;
     //public float speed2;
     public GameObject obj;
     public Player player;
-
+    
     void Start()
     {
         aau = GetComponent<AudioPlayer>();
@@ -47,6 +49,7 @@ public class TombScript : MonoBehaviour
         //!collision.isTrigger &&
         if (collision.gameObject.tag == "Player" && !isIn)
         {
+            wasThere = true;
             anim.SetBool("Close", false);
             anim.SetBool("Open", false);
             obj = collision.gameObject;
@@ -76,7 +79,8 @@ public class TombScript : MonoBehaviour
         
             //Vector3 pr = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z - 90);
             Vector3 ps2 = new Vector3(standPose2.position.x, standPose2.position.y, standPose2.position.z);
-            Vector3 pr2 = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90);
+            Vector3 pr2 = new Vector3(0, 0, Mathf.Rad2Deg * transform.rotation.z * 2 + 90);
+        //Debug.Log(transform.rotation.z);
 
             anim.SetBool("Open", true);
             yield return new WaitForSeconds(speedOfCap);
@@ -88,7 +92,7 @@ public class TombScript : MonoBehaviour
 
 
 
-            isIn = false;
+        isIn = false;
             player.PosTomb(null);
         
     }
@@ -103,9 +107,8 @@ public class TombScript : MonoBehaviour
 
         Vector3 ps = new Vector3(standPose.position.x, standPose.position.y, standPose.position.z);
         Vector3 ss = new Vector3(standPose1.position.x, standPose1.position.y, standPose1.position.z);
-        Vector3 pr = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z - 90);
-       
-
+        Vector3 pr = new Vector3(0, 0, Mathf.Rad2Deg * transform.rotation.z* 2 - 90);
+        //Debug.Log(standPose1.rotation.z);
         //obj.transform.position = Vector2.MoveTowards(obj.transform.position, ps, 0.5f * Time.deltaTime);
 
         obj.transform.DOMove(ps, speed);
@@ -120,5 +123,8 @@ public class TombScript : MonoBehaviour
         endEntering = true;
         
     }
-
+    public bool WasThere()
+    {
+        return wasThere;
+    }
 }

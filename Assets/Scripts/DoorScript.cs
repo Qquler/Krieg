@@ -19,9 +19,10 @@ public class DoorScript : MonoBehaviour
     //}
 
     private AudioPlayer aau;
+    public bool canOpen;
+
     public AudioClip entrSound;
-    public bool opn = false;
-    public bool isOpen = false;
+    [HideInInspector] public bool isOpen = false;
     [SerializeField] private float volume = 1f;
     //Scarab = this.transform.Find("Scarab").gameObject;
     // Start is called once before the first execution of Update after the MonoBehaviour is createdý
@@ -31,6 +32,7 @@ public class DoorScript : MonoBehaviour
     private bool isIn = false;
     private bool endEntering = false;
     public float speed;
+    public float waitForCloseTime = 0f;
     //public float speed1;
     //public float speed2;
     public GameObject obj;
@@ -57,7 +59,7 @@ public class DoorScript : MonoBehaviour
      
         anim = GetComponent<Animator>();
         anim.speed = 1f / speed;
-
+        anim.SetBool("Open", false);
     }
 
     public void Open()
@@ -71,6 +73,10 @@ public class DoorScript : MonoBehaviour
         
         // Update is called once per frame
 
+    }
+    public void Activate()
+    {
+        Open();
     }
     
     public void Close()
@@ -106,23 +112,42 @@ public class DoorScript : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-             
-            if (Input.GetAxis("MainActionButton") == 1) { 
-                Open();
-                
+        //Debug.Log(canOpen);
+
+
+            if (collision.gameObject.tag == "Player")
+            {
+
+                if (Input.GetAxis("MainActionButton") == 1)
+                {
+                if (canOpen)
+                {
+                    Open();
+                }
+
+                }
             }
-        }
+        
     }
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (canOpen)
         {
-        
-                Close();
+            if (collision.gameObject.tag == "Player" && isOpen)
+            {
+                StartCoroutine(WaitingForClose());
 
-            
+
+            }
         }
+    }
+    IEnumerator WaitingForClose()
+    {
+        yield return new WaitForSeconds(waitForCloseTime);
+        Close();
+    }
+    public void AllowToOpen(bool allow)
+    {
+        canOpen = allow;
     }
 }
